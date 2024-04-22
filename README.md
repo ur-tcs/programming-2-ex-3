@@ -8,7 +8,7 @@ Your are allowed to copy/clone/fork this repository, but not to share solutions 
 
 In previous exercises, we used `if` conditionals and `.` field accessors to write functions on data types such as lists or trees. This week, we’ll use pattern matching to make these functions more succinct and readable. We’ll move from this:
 
-```
+```scala
 def reduceIf(f: (Int, Int) => Int)(l: IntList): Int =
   if l.isEmpty then throw IllegalArgumentException("Empty list!")
   else if l.tail.isEmpty then l.head
@@ -17,7 +17,7 @@ def reduceIf(f: (Int, Int) => Int)(l: IntList): Int =
 
 to this:
 
-```
+```scala
 def reduceMatch(f: (Int, Int) => Int)(l: IntList): Int =
   l match
     case IntNil              => throw IllegalArgumentException("Empty list!")
@@ -27,7 +27,7 @@ def reduceMatch(f: (Int, Int) => Int)(l: IntList): Int =
 
 Most functional programmers find the second one much more readable, because it aligns the way the data is *destructed* (taken apart into a head and a tail) and the way the data is *constructed* (assembled from a head and a tail):
 
-```
+```scala
 def constructDestruct =
   IntCons(1, IntCons(2, IntNil)) match
     case IntCons(a, IntCons(b, IntNil)) =>
@@ -43,7 +43,7 @@ Days of the week are a great example of simple enumerations. So, which day is to
 
 The `enum` representing weekdays is defined as follows:
 
-```
+```scala
 enum Weekday:
   case Monday
   case Tuesday
@@ -57,12 +57,12 @@ enum Weekday:
 Complete the following two functions:
 
 1. `next` returns the next day of the week:
-   ```
+   ```scala
    def next(d: Weekday): Weekday =
      ???
    ```
 2. `prev` returns the previous day of the week:
-   ```
+   ```scala
    def prev(d: Weekday): Weekday =
      ???
    ```
@@ -75,7 +75,7 @@ Complete the following two functions:
 
 By now you’re very familiar with Booleans. But in real life, not every thing is `Yes` or `No`: sometimes we just don’t know! Tri-boolean logic helps with this by adding an indeterminate value, `Maybe`:
 
-```
+```scala
 enum TriBool:
   case Yes
   case No
@@ -92,19 +92,19 @@ enum TriBool:
 
 2. Implement the following operations (we expect that you’ll find pattern-matching very nice for that!)
 
-```
+```scala
 def neg(b: TriBool): TriBool =
     ???
 ```
-```
+```scala
   def and(b1: TriBool, b2: TriBool): TriBool =
     ???
 ```
-```
+```scala
   def or(b1: TriBool, b2: TriBool): TriBool =
     ???
 ```
-```
+```scala
   def nand(b1: TriBool, b2: TriBool): TriBool =
     ???
 ```
@@ -133,36 +133,36 @@ Think of what Scala types and features you may use to represent a context before
 Implement the following three functions:
 
 - `empty` returns an empty context:
-  ```
+  ```scala
   def empty: Context =
     ???
   ```
 - `cons` forms a new context by associating a new pair of name-value in an existing context:
-  ```
+  ```scala
   def cons(name: String, value: Int, rem: Context) =
     ???
   ```
 - `lookup` looks a name up in a given context:
-  ```
+  ```scala
   def lookup(ctx: Context, name: String): LookupResult =
     ???
   ```
 
   Notice the return type: we used another `enum`, called `LookupResult`, to capture two possible results: either finding a value, or indicating that the name could not be found.
-  ```
+  ```scala
   enum LookupResult:
     case Ok(v: Int)
     case NotFound
   ```
   
 - `erase` drops **all** bindings with the given name in the context:
-  ```
+  ```scala
   def erase(ctx: Context, name: String): Context =
     ???
   ```
 
 - Finally, `filter` drops all bindings that fail the test `pred` (i.e. for which `pred` evaluated to false):
-  ```
+  ```scala
   def filter(ctx: Context, pred: (String, Int) => Boolean): Context =
     ???
   ```
@@ -175,18 +175,23 @@ Last week we worked with trees using a clunky API of `.left`, `.right`, and `.is
 
 The `IntTree` `enum` is defined as the following:
 
-```
+```scala
 enum IntTree:
   case Leaf(value: Int)
   case Branch(left: IntTree, right: IntTree)
 ```
 
-What is the enum representation of the tree below? Test your code via running `testOnly IntTreeOpsTest` in `sbt`.
+What is the `enum` representation of the tree below?
 
-*BILD*
+<details>
+  <summary>Solution</summary>
+    Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))
+</details>
+
+![treeExampleImage](example.jpg)
 
 Let's take a look at the `treeMap` function:
-```
+```scala
 def treeMap(tree: IntTree, op: Int => Int): IntTree =
     ???
 ```
@@ -195,9 +200,9 @@ It takes a tree and a function, and creates a new tree by applying the function 
 
 For instance, let’s name the tree we just saw in the diagram as `t`. The following diagram dipicts the computation of `treeMap(t, x => x + 1)`.
 
-*BILD*
+![tree1Image](treeMap1.jpg)
 
-*BILD*
+![tree2Image](treeMap2.jpg)
 
 ## IntList
 
@@ -207,7 +212,7 @@ Let’s implement functions on `IntList` again, this time with pattern matching.
 
 First, rewrite `polishEval` (from last week) with pattern-matching:
 
-  ```
+  ```scala
   def polishEval(l: IntList): (Int, IntList) =
     ???
   ```
@@ -220,7 +225,7 @@ Compare your version new version with the original `if`-based implementation. Wh
 
 `map`, `fold`, and other functions that we have previously studied operate on a single list. We have already seen that some of these generalize to trees; here, we will see how one of them (`map`) generalizes to multiple lists. This function is called `zipWith` in Scala:
 
-  ```
+  ```scala
   def zipWith(l1: IntList, l2: IntList, op: (Int, Int) => Int): IntList =
     ???
   ```
@@ -237,7 +242,7 @@ Implement `zipWith`. Do you see a connection with `map`?
 
 `zipWith` does a lot of work at once, and we can make it a bit more modular. For this, let’s define an intermediate type `IntIntList` of lists of pairs of ints:
 
-```
+```scala
 enum IntIntList:
   case IntIntNil
   case IntIntCons(xy: (Int, Int), xs: IntIntList)
@@ -246,35 +251,35 @@ import IntIntList.*
 
 1. Define a function `zip` to construct a list of pairs from a pair of lists:
 
-  ```
+  ```scala
   def zip(l1: IntList, l2: IntList): IntIntList =
     ???
   ```
 
 2. Define a function `unzip` to construct a pair of lists from a list of pairs:
 
-  ```
+  ```scala
   def unzip(l: IntIntList): (IntList, IntList) =
     ???
   ```
 
 3. Define a function `map2to1` on lists of pairs that produces a list of ints:
 
-  ```
+  ```scala
   def map2to1(op: (Int, Int) => Int)(l: IntIntList): IntList =
     ???
   ````
 
 4 Rewrite `zipWith` using (some of) the functions above.
   
-  ```
+  ```scala
   def zipThenWith(l1: IntList, l2: IntList, op: (Int, Int) => Int): IntList =
     ???
   ```
 
 5. Use `zipWith` to implement a function `movingWindow` on lists that returns sequences of consecutive pairs in its input list. For example, `movingWindow` applied to the list `a b c d e` should produce the list `ab bc cd de`.
 
-  ```
+  ```scala
   def movingWindow(l: IntList): IntIntList =
     ???
   ```
@@ -285,7 +290,7 @@ Enumerations and case classes are often useful to distinguish multiple kinds of 
 
 For example, a function that extracts the second element of a list might return a type like the following:
 
-```
+```scala
 enum ExtractResult:
   case SecondElem(i: Int)
   case NotLongEnough
@@ -296,7 +301,7 @@ When the input list is empty, `extractSecond` returns `EmptyList`; when the inpu
 
 Implement `extractSecond`:
 
-  ```
+  ```scala
   def extractSecond(l: IntList): ExtractResult =
     ???
   ```
