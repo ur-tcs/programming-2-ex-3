@@ -67,7 +67,7 @@ Complete the following two functions:
      ???
    ```
 
-**Hint:** Want to test your code? Run testOnly WeekdayOpsTest in sbt.
+**Hint:** Want to test your code? Run `testOnly WeekdayOpsTest` in `sbt`.
 
 **Note:** This exercise is taken from [Logical Foundations](https://softwarefoundations.cis.upenn.edu/lf-current/Basics.html), a book about mathematical proofs of programs, and translated into Scala.
 
