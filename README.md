@@ -35,9 +35,7 @@ def constructDestruct =
     case _ => throw Exception("Not possible!")
 ```
 
-**Warning:** Previously, we wrote `IntNil()` for empty `IntList`s. Now that we know about `enum`s and case classes, we can use the more succinct and convenient syntax `IntNil` (no parentheses).
-
-## Weekdays
+## Weekdays (Weekday.scala & WeekdayOps.scala)
 
 Days of the week are a great example of simple enumerations. So, which day is tomorrow? let’s implement a function to find out.
 
@@ -71,7 +69,7 @@ Complete the following two functions:
 
 **Note:** This exercise is taken from [Logical Foundations](https://softwarefoundations.cis.upenn.edu/lf-current/Basics.html), a book about mathematical proofs of programs, and translated into Scala.
 
-## Tri-booleans
+## Tri-booleans (TriBool.scala & triBoolOps.scala)
 
 By now you’re very familiar with Booleans. But in real life, not every thing is `Yes` or `No`: sometimes we just don’t know! Tri-boolean logic helps with this by adding an indeterminate value, `Maybe`:
 
@@ -113,7 +111,7 @@ def neg(b: TriBool): TriBool =
 
 **Note:** `nand` is a very surprising operator. If you’re not familiar with it, inspect the test cases, or [read more about it!](https://en.wikipedia.org/wiki/Sheffer_stroke)
 
-## Contexts
+## Contexts (EnumContext.scala)
 
 Now that you have a bit of experience with pattern matching, let’s use it to construct more complex types. In this exercise we’ll study *contexts*, which are essentially lists of keys and values. 
 
@@ -127,6 +125,24 @@ Our contexts associate names (`String`s) with values (`Int`s), and let us do the
 For instance, we can have a context which associates `"x"` with `1` and `"y"` with `2`. We can then look up the keys: looking up `"x"` in the context produces `1`, looking up `"y"` produces `2`, and looking up `"z"` or any other name results in a not-found error. We can add more mapping in the context: after associating `"z"` with `3`, looking `"z"` up in the new context will result in `3`, instead of an error.
 
 Think of what Scala types and features you may use to represent a context before proceeding.
+
+<details>
+  <summary>Our choice of representation</summary>
+    We’ll start by representing contexts using an enum (and we’ll see another representation later):
+
+    
+    enum Context:
+      case Empty
+      case Cons(name: String, value: Int, tail: Context)
+    
+    
+  We have two cases:
+  - `Empty`, which represents an empty context;
+  - `Cons`, which forms a new context by associating a new name with its value in an existing context.
+
+  For example, the context that associates `"x"` with `1` and `"y"` with `2` can be represented as `Cons("x", 1, Cons("y", 2, Empty))`, or `Cons("y", 2, Cons("x", 1, Empty))`.
+  
+</details>
 
 **Note:** If you want to experiment with contexts in the playground, make sure to add `import EnumContext.*` to bring `Cons` and `Empty` into the worksheet’s scope.
 
@@ -186,7 +202,7 @@ What might be the `enum` representation of the tree below?
 
 You will learn more about trees later in the course.
 
-## IntList
+## IntList (IntList.scala & IntListOps.scala)
 
 Let’s implement functions on `IntList` again, this time with pattern matching.
 
