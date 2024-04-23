@@ -161,12 +161,6 @@ Implement the following three functions:
     ???
   ```
 
-- Finally, `filter` drops all bindings that fail the test `pred` (i.e. for which `pred` evaluated to false):
-  ```scala
-  def filter(ctx: Context, pred: (String, Int) => Boolean): Context =
-    ???
-  ```
-
 **Hint:** Want to test your code? Run `testOnly EnumContextTest` in `sbt`.
 
 ## Tree Mapping
@@ -181,7 +175,7 @@ enum IntTree:
   case Branch(left: IntTree, right: IntTree)
 ```
 
-What is the `enum` representation of the tree below?
+What might be the `enum` representation of the tree below?
 
 <details>
   <summary>Solution</summary>
@@ -190,19 +184,7 @@ What is the `enum` representation of the tree below?
 
 ![treeExampleImage](example.jpg)
 
-Let's take a look at the `treeMap` function:
-```scala
-def treeMap(tree: IntTree, op: Int => Int): IntTree =
-    ???
-```
-
-It takes a tree and a function, and creates a new tree by applying the function on the value of each leaf node in the tree.
-
-For instance, let’s name the tree we just saw in the diagram as `t`. The following diagram dipicts the computation of `treeMap(t, x => x + 1)`.
-
-![tree1Image](treeMap1.jpg)
-
-![tree2Image](treeMap2.jpg)
+You will learn more about trees later in the course.
 
 ## IntList
 
@@ -220,69 +202,6 @@ First, rewrite `polishEval` (from last week) with pattern-matching:
 Throw `InvalidOperationNumber exception` if the operator is not defined, and `InvalidExpression` if the input is not a valid polish-notation expression.
 
 Compare your version new version with the original `if`-based implementation. Which one is more readable?
-
-### zipWith
-
-`map`, `fold`, and other functions that we have previously studied operate on a single list. We have already seen that some of these generalize to trees; here, we will see how one of them (`map`) generalizes to multiple lists. This function is called `zipWith` in Scala:
-
-  ```scala
-  def zipWith(l1: IntList, l2: IntList, op: (Int, Int) => Int): IntList =
-    ???
-  ```
-
-Here is one possible specification for `zipWith`, using `l[n]` to mean “the n-th element of list `l`”:
-
-Given two lists `xs` and `ys` and an operator `op`, let `zs` be `zipWith(xs, ys, op)`. Then, `zs` should have length `min(length(xs), length(ys))`, and the `i`-th element of `zs` should be `op(xs[i], ys[i])` for all `i`.
-
-Note the part about the length of `zs`. For instance, `zipWith(IntNil, IntCons(1, Nil), (x, y) => x + y)` should equal to `IntNil`.
-
-Implement `zipWith`. Do you see a connection with `map`?
-
-### A modular implementation of zipWith
-
-`zipWith` does a lot of work at once, and we can make it a bit more modular. For this, let’s define an intermediate type `IntIntList` of lists of pairs of ints:
-
-```scala
-enum IntIntList:
-  case IntIntNil
-  case IntIntCons(xy: (Int, Int), xs: IntIntList)
-import IntIntList.*
-```
-
-1. Define a function `zip` to construct a list of pairs from a pair of lists:
-
-  ```scala
-  def zip(l1: IntList, l2: IntList): IntIntList =
-    ???
-  ```
-
-2. Define a function `unzip` to construct a pair of lists from a list of pairs:
-
-  ```scala
-  def unzip(l: IntIntList): (IntList, IntList) =
-    ???
-  ```
-
-3. Define a function `map2to1` on lists of pairs that produces a list of ints:
-
-  ```scala
-  def map2to1(op: (Int, Int) => Int)(l: IntIntList): IntList =
-    ???
-  ````
-
-4 Rewrite `zipWith` using (some of) the functions above.
-  
-  ```scala
-  def zipThenWith(l1: IntList, l2: IntList, op: (Int, Int) => Int): IntList =
-    ???
-  ```
-
-5. Use `zipWith` to implement a function `movingWindow` on lists that returns sequences of consecutive pairs in its input list. For example, `movingWindow` applied to the list `a b c d e` should produce the list `ab bc cd de`.
-
-  ```scala
-  def movingWindow(l: IntList): IntIntList =
-    ???
-  ```
 
 ### extractSecond
 
