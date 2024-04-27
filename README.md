@@ -29,6 +29,8 @@ def reduceMatch(f: (Int, Int) => Int)(l: IntList): Int =
 
 Most functional programmers find the second one much more readable, because it aligns the way the data is *destructed* (taken apart into a head and a tail) and the way the data is *constructed* (assembled from a head and a tail):
 
+**Note:** in this function, the `f` is a higher-order argument. We will discuss them in detail in week 5.
+
 ```scala
 def constructDestruct =
   IntCons(1, IntCons(2, IntNil)) match
@@ -36,6 +38,11 @@ def constructDestruct =
       println(f"Found $a and $b")
     case _ => throw Exception("Not possible!")
 ```
+
+**Warning:** Previously, we wrote `IntNil()` for empty `IntList`s. Now that we know about `enum`s and case classes, we can use the more succinct and convenient syntax `IntNil` (no parentheses).
+
+**Hint:** If you find yourself looking for more examples of pattern matching after completing this set, consider revisiting week 1 and week 2 exercises and redefining all the functions with pattern matching.
+
 
 ## Weekdays (Weekday.scala & WeekdayOps.scala)
 
@@ -156,6 +163,8 @@ Think of what Scala types and features you may use to represent a context before
 </details>
 
 **Note:** If you want to experiment with contexts in the playground, make sure to add `import EnumContext.*` to bring `Cons` and `Empty` into the worksheet’s scope.
+
+**Warning:** When multiple bindings in a context have the same name, only the outermost is effective. For instance, given a context `Cons("a", 1, Cons("b", 2, Cons("a", 3, Empty)))`, looking up `"a"` this context should return `1` instead of `3`.
 
 Implement the following three functions:
 
