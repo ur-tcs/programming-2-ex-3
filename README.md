@@ -97,19 +97,28 @@ def neg(b: TriBool): TriBool =
     ???
 ```
 ```scala
-  def and(b1: TriBool, b2: TriBool): TriBool =
-    ???
+def and(b1: TriBool, b2: TriBool): TriBool =
+  ???
 ```
 ```scala
-  def or(b1: TriBool, b2: TriBool): TriBool =
-    ???
+def or(b1: TriBool, b2: TriBool): TriBool =
+  ???
 ```
 ```scala
-  def nand(b1: TriBool, b2: TriBool): TriBool =
-    ???
+def nand(b1: TriBool, b2: TriBool): TriBool =
+  ???
 ```
 
-**Hint:** Want to test your code? Run `testOnly TriBoolOpsTest` in `sbt`.
+**Hint 1:** For pattern-matching two values simultaneously, often the following style is used:
+
+```scala
+  (b1, b2) match
+    case (Yes, Yes) => [...]
+```
+
+An alternative is to use nested match-expressions.
+
+**Hint 2:** Want to test your code? Run `testOnly TriBoolOpsTest` in `sbt`.
 
 **Note:** `nand` is a very surprising operator. If you’re not familiar with it, inspect the test cases, or [read more about it!](https://en.wikipedia.org/wiki/Sheffer_stroke)
 
