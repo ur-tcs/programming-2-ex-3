@@ -235,7 +235,7 @@ Let’s implement functions on `IntList` again, this time with pattern matching.
 
 ### polishEval
 
-First, rewrite `polishEval` (from last week) with pattern-matching:
+First, rewrite `polishEval` ([from last week](https://github.com/ur-tcs/programming-2-ex-2?tab=readme-ov-file#recursion-on-lists)) with pattern-matching:
 
   ```scala
   def polishEval(l: IntList): (Int, IntList) =
