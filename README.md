@@ -121,6 +121,7 @@ def nand(b1: TriBool, b2: TriBool): TriBool =
 ```scala
   (b1, b2) match
     case (Yes, Yes) => [...]
+    case (Yes, No)  => [...]
 ```
 
 An alternative is to use nested match-expressions.
