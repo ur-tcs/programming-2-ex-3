@@ -1,10 +1,12 @@
-# Programming 2 - Exercise 2 : Pattern Matching
+# Programming 2 - Exercise 3: Pattern Matching
 
 This exercise set is intended to help you practice pattern matching.
 
 As in the every exercise you need to obtain the exercise files. Clone or fork the repository: `git clone https://github.com/ur-tcs/programming-2-ex-3.git` or download it by clicking on the green `<code>` button and select `download`.
 
-Your are allowed to copy/clone/fork this repository, but not to share solutions of the exercise in any public repository or web page.
+__Your are allowed to copy/clone/fork this repository, but not to share solutions of the exercise in any public repository or web page.__
+
+## Introduction
 
 In previous exercises, we used `if` conditionals and `.` field accessors to write functions on data types such as lists or trees. This week, we’ll use pattern matching to make these functions more succinct and readable. We’ll move from this:
 
