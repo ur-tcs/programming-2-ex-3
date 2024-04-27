@@ -6,7 +6,11 @@ As in the every exercise you need to obtain the exercise files. Clone or fork th
 
 __Your are allowed to copy/clone/fork this repository, but not to share solutions of the exercise in any public repository or web page.__
 
-## Introduction
+## Back to week 2
+
+Since we talked about abstract classes and traits only in week 3, you should first have a look at the [last part of last week's exercises](https://github.com/ur-tcs/programming-2-ex-2?tab=readme-ov-file#classes), if you have not solved the exercise yet.
+
+## Introduction to Pattern Matching
 
 In previous exercises, we used `if` conditionals and `.` field accessors to write functions on data types such as lists or trees. This week, we’ll use pattern matching to make these functions more succinct and readable. We’ll move from this:
 
