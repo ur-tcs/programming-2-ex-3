@@ -267,3 +267,43 @@ Implement `extractSecond`:
   def extractSecond(l: IntList): ExtractResult =
     ???
   ```
+
+### zipping and unzipping
+
+We have studied many functions on single lists, and also seen that some of these generalize to trees; here, we will introduce some of the most essential operations multiple lists.
+
+Let’s define an intermediate type IntIntList of lists of pairs of ints:
+
+```scala
+enum IntIntList:
+  case IntIntNil
+  case IntIntCons(xy: (Int, Int), xs: IntIntList)
+import IntIntList.*
+```
+
+1. Implement a function `zip` to construct a list of pairs from a pair of lists:
+
+```scala
+def zip(l1: IntList, l2: IntList): IntIntList =
+  ???
+```
+
+Here is one possible specification for `zip`, using `l[n]` to mean "the `n`-th element of list `l`": Given two lists `xs` and `ys`, let `zs` be `zip(xs, ys)`. Then, `zs` should have length `min(length(xs), length(ys))`, and the `i`-th element of `zs` should be `(xs[i], ys[i])` for all `i`.
+
+Note the part about the length of zs. For instance, `zip(IntNil, IntCons(1, Nil))` should equal to `IntIntNil`.
+
+2. Define a function unzip to construct a pair of lists from a list of pairs:
+
+```scala
+def unzip(l: IntIntList): (IntList, IntList) =
+  ???
+```
+
+3. What relations are there between `zip` and `unzip`? Are you able to prove those relations?
+
+4. Use your function `zip` to implement a function `movingWindow` on lists that returns sequences of consecutive pairs in its input list. For example, `movingWindow` applied to the list `a b c d e` should produce the list `ab bc cd de`.
+
+```scala
+def movingWindow(l: IntList): IntIntList =
+  ???
+```
