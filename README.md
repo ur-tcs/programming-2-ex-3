@@ -6,7 +6,11 @@ As in the every exercise you need to obtain the exercise files. Clone or fork th
 
 __Your are allowed to copy/clone/fork this repository, but not to share solutions of the exercise in any public repository or web page.__
 
-## Introduction
+## Back to week 2
+
+Since we talked about abstract classes and traits only in week 3, you should first have a look at the [last part of last week's exercises](https://github.com/ur-tcs/programming-2-ex-2?tab=readme-ov-file#classes), if you have not solved the exercise yet.
+
+## Introduction to Pattern Matching
 
 In previous exercises, we used `if` conditionals and `.` field accessors to write functions on data types such as lists or trees. This week, we’ll use pattern matching to make these functions more succinct and readable. We’ll move from this:
 
@@ -29,6 +33,8 @@ def reduceMatch(f: (Int, Int) => Int)(l: IntList): Int =
 
 Most functional programmers find the second one much more readable, because it aligns the way the data is *destructed* (taken apart into a head and a tail) and the way the data is *constructed* (assembled from a head and a tail):
 
+**Note:** in this function, the `f` is a higher-order argument. We will discuss them in detail in week 5.
+
 ```scala
 def constructDestruct =
   IntCons(1, IntCons(2, IntNil)) match
@@ -36,6 +42,11 @@ def constructDestruct =
       println(f"Found $a and $b")
     case _ => throw Exception("Not possible!")
 ```
+
+**Warning:** Previously, we wrote `IntNil()` for empty `IntList`s. Now that we know about `enum`s and case classes, we can use the more succinct and convenient syntax `IntNil` (no parentheses).
+
+**Hint:** If you find yourself looking for more examples of pattern matching after completing this set, consider revisiting week 1 and week 2 exercises and redefining all the functions with pattern matching.
+
 
 ## Weekdays (Weekday.scala & WeekdayOps.scala)
 
@@ -94,22 +105,32 @@ enum TriBool:
 
 ```scala
 def neg(b: TriBool): TriBool =
-    ???
+  ???
 ```
 ```scala
-  def and(b1: TriBool, b2: TriBool): TriBool =
-    ???
+def and(b1: TriBool, b2: TriBool): TriBool =
+  ???
 ```
 ```scala
-  def or(b1: TriBool, b2: TriBool): TriBool =
-    ???
+def or(b1: TriBool, b2: TriBool): TriBool =
+  ???
 ```
 ```scala
-  def nand(b1: TriBool, b2: TriBool): TriBool =
-    ???
+def nand(b1: TriBool, b2: TriBool): TriBool =
+  ???
 ```
 
-**Hint:** Want to test your code? Run `testOnly TriBoolOpsTest` in `sbt`.
+**Hint 1:** For pattern-matching two values simultaneously, often the following style is used:
+
+```scala
+  (b1, b2) match
+    case (Yes, Yes) => [...]
+    case (Yes, No)  => [...]
+```
+
+An alternative is to use nested match-expressions.
+
+**Hint 2:** Want to test your code? Run `testOnly TriBoolOpsTest` in `sbt`.
 
 **Note:** `nand` is a very surprising operator. If you’re not familiar with it, inspect the test cases, or [read more about it!](https://en.wikipedia.org/wiki/Sheffer_stroke)
 
@@ -147,6 +168,8 @@ Think of what Scala types and features you may use to represent a context before
 </details>
 
 **Note:** If you want to experiment with contexts in the playground, make sure to add `import EnumContext.*` to bring `Cons` and `Empty` into the worksheet’s scope.
+
+**Warning:** When multiple bindings in a context have the same name, only the outermost is effective. For instance, given a context `Cons("a", 1, Cons("b", 2, Cons("a", 3, Empty)))`, looking up `"a"` this context should return `1` instead of `3`.
 
 Implement the following three functions:
 
@@ -206,11 +229,13 @@ You will learn more about trees later in the course.
 
 ## IntList (IntList.scala & IntListOps.scala)
 
-Let’s implement functions on `IntList` again, this time with pattern matching.
+Let’s implement functions on `IntList` again, this time with pattern matching. Before starting this part of exercises, we suggest you implementing several `IntList` questions from previous weeks' exercises using pattern matching to warm yourself up!
+
+**Hint:** Want to check answers in this section on computer? Test them with `testOnly IntListOpsTest`.
 
 ### polishEval
 
-First, rewrite `polishEval` (from last week) with pattern-matching:
+First, rewrite `polishEval` ([from last week](https://github.com/ur-tcs/programming-2-ex-2?tab=readme-ov-file#recursion-on-lists)) with pattern-matching:
 
   ```scala
   def polishEval(l: IntList): (Int, IntList) =
@@ -242,3 +267,43 @@ Implement `extractSecond`:
   def extractSecond(l: IntList): ExtractResult =
     ???
   ```
+
+### zipping and unzipping
+
+We have studied many functions on single lists, and also seen that some of these generalize to trees; here, we will introduce some of the most essential operations multiple lists.
+
+Let’s define an intermediate type IntIntList of lists of pairs of ints:
+
+```scala
+enum IntIntList:
+  case IntIntNil
+  case IntIntCons(xy: (Int, Int), xs: IntIntList)
+import IntIntList.*
+```
+
+1. Implement a function `zip` to construct a list of pairs from a pair of lists:
+
+```scala
+def zip(l1: IntList, l2: IntList): IntIntList =
+  ???
+```
+
+Here is one possible specification for `zip`, using `l[n]` to mean "the `n`-th element of list `l`": Given two lists `xs` and `ys`, let `zs` be `zip(xs, ys)`. Then, `zs` should have length `min(length(xs), length(ys))`, and the `i`-th element of `zs` should be `(xs[i], ys[i])` for all `i`.
+
+Note the part about the length of `zs`. For instance, `zip(IntNil, IntCons(1, Nil))` should equal to `IntIntNil`.
+
+2. Define a function `unzip` to construct a pair of lists from a list of pairs:
+
+```scala
+def unzip(l: IntIntList): (IntList, IntList) =
+  ???
+```
+
+3. What relations are there between `zip` and `unzip`? Are you able to prove those relations?
+
+4. Use your function `zip` to implement a function `movingWindow` on lists that returns sequences of consecutive pairs in its input list. For example, `movingWindow` applied to the list `a b c d e` should produce the list `ab bc cd de`.
+
+```scala
+def movingWindow(l: IntList): IntIntList =
+  ???
+```
