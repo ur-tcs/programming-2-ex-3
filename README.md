@@ -290,9 +290,9 @@ def zip(l1: IntList, l2: IntList): IntIntList =
 
 Here is one possible specification for `zip`, using `l[n]` to mean "the `n`-th element of list `l`": Given two lists `xs` and `ys`, let `zs` be `zip(xs, ys)`. Then, `zs` should have length `min(length(xs), length(ys))`, and the `i`-th element of `zs` should be `(xs[i], ys[i])` for all `i`.
 
-Note the part about the length of zs. For instance, `zip(IntNil, IntCons(1, Nil))` should equal to `IntIntNil`.
+Note the part about the length of `zs`. For instance, `zip(IntNil, IntCons(1, Nil))` should equal to `IntIntNil`.
 
-2. Define a function unzip to construct a pair of lists from a list of pairs:
+2. Define a function `unzip` to construct a pair of lists from a list of pairs:
 
 ```scala
 def unzip(l: IntIntList): (IntList, IntList) =
