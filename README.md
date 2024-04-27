@@ -94,7 +94,7 @@ enum TriBool:
 
 ```scala
 def neg(b: TriBool): TriBool =
-    ???
+  ???
 ```
 ```scala
 def and(b1: TriBool, b2: TriBool): TriBool =
