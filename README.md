@@ -225,7 +225,9 @@ You will learn more about trees later in the course.
 
 ## IntList (IntList.scala & IntListOps.scala)
 
-Let’s implement functions on `IntList` again, this time with pattern matching.
+Let’s implement functions on `IntList` again, this time with pattern matching. Before starting this part of exercises, we suggest you implementing several `IntList` questions from previous weeks' exercises using pattern matching to warm yourself up!
+
+**Hint:** Want to check answers in this section on computer? Test them with `testOnly IntListOpsTest`.
 
 ### polishEval
 
