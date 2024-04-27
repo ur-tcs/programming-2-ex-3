@@ -8,3 +8,12 @@ enum ExtractResult:
 
 def extractSecond(l: IntList): ExtractResult =
   ???
+
+def zip(l1: IntList, l2: IntList): IntIntList =
+  ???
+
+def unzip(l: IntIntList): (IntList, IntList) =
+  ???
+
+def movingWindow(l: IntList): IntIntList =
+  ???

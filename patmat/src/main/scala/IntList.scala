@@ -13,3 +13,7 @@ final case class IntNil() extends IntList:
 
 final case class IntCons(head: Int, tail: IntList) extends IntList:
   def isEmpty: Boolean = false
+
+enum IntIntList:
+  case IntIntNil
+  case IntIntCons(xy: (Int, Int), xs: IntIntList)

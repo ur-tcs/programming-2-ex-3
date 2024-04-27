@@ -1,3 +1,6 @@
+// Replace with your definition
+type Context = Nothing
+
 def empty: Context =
   ???
 
