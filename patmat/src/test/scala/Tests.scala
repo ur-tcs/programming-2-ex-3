@@ -154,3 +154,12 @@ class IntListOpsTest extends munit.FunSuite {
         val input = IntCons(1, IntNil())
         assertEquals(movingWindow(input), IntIntList.IntIntNil)
 }
+
+class IntTreeOpsTest extends munit.FunSuite {
+    test("The treeMap functuion should return a tree like described in the task description"):
+        val t = IntTree.Branch(IntTree.Branch(IntTree.Leaf(1), IntTree.Leaf(2)), IntTree.Leaf(3))
+        assertEquals(treeMap(t, 1), IntTree.Branch(IntTree.Branch(IntTree.Leaf(2), IntTree.Leaf(3)), IntTree.Leaf(4)))
+    test("The treeReduce functuion should return a tree like described in the task description"):
+        val t = IntTree.Branch(IntTree.Branch(IntTree.Leaf(1), IntTree.Leaf(2)), IntTree.Leaf(3))
+        assertEquals(treeReduce(t), 6)
+}
