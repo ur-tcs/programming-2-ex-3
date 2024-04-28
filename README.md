@@ -240,9 +240,9 @@ It takes a tree and adds a specified value to each leaf node.
 
 For instance, let’s name the tree we just saw in the diagram as `t`. The following diagram dipicts the computation of `treeMap(t, 1)`.
 
-*BILD*
+![treeMapExampleImage1](treeMap1.jpg)
 
-*BILD*
+![treeMapExampleImage2](treeMap2.jpg)
 
 ### Tree Reducing
 
@@ -255,9 +255,9 @@ def treeReduce(tree: IntTree): Int =
 
 Given a tree, the function returns the sum of all leaf nodes. The diagram below depicts the process `treeReduce(t)`.
 
-*BILD*
+![treeReduceExampleImage1](treeReduce1.jpg)
 
-*BILD*
+![treeReduceExampleImage2](treeReduce2.jpg)
 
 Intuitively, it is a *bottom-up* aggregation of values in the leaves. The values flow from the bottom to the root. At each branch node, the aggregated results from the two children are merged.
 
