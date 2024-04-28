@@ -128,4 +128,29 @@ class IntListOpsTest extends munit.FunSuite {
     test("A empty list should return Emptylist"):
         val list = IntNil()
         assertEquals(extractSecond(list), ExtractResult.EmptyList)
+
+    test("Zipping two lists should return a list of pairs"):
+        val list1 = IntCons(1, IntCons(2, IntCons(3, IntNil())))
+        val list2 = IntCons(4, IntCons(5, IntCons(6, IntNil())))
+        assertEquals(zip(list1, list2), IntIntList.IntIntCons((1, 4), IntIntList.IntIntCons((2, 5), IntIntList.IntIntCons((3, 6), IntIntList.IntIntNil))))
+    test("If one of the two lists is empty, IntIntNil should be returned"):
+        val list1 = IntCons(1, IntNil())
+        val list2 = IntNil()
+        assertEquals(zip(list1, list2), IntIntList.IntIntNil)
+    test("Unzipping a list of pairs should return two separate lists"):
+        val input = IntIntList.IntIntCons((1, 4), IntIntList.IntIntCons((2, 5), IntIntList.IntIntCons((3, 6), IntIntList.IntIntNil)))
+        val (result1, result2) = unzip(input)
+        assertEquals(result1, IntCons(1, IntCons(2, IntCons(3, IntNil()))))
+        assertEquals(result2, IntCons(4, IntCons(5, IntCons(6, IntNil()))))
+    test("Unzipping a empty list should return IntNil"):
+        val input = IntIntList.IntIntNil
+        val (result1, result2) = unzip(input)
+        assertEquals(result1, IntNil())
+        assertEquals(result2, IntNil())
+    test("movingwindow should return a consecutive list of pairs"):
+        val input = IntCons(1, IntCons(2, IntCons(3, IntCons(4, IntNil()))))
+        assertEquals(movingWindow(input), IntIntList.IntIntCons((1, 2), IntIntList.IntIntCons((2, 3), IntIntList.IntIntCons((3, 4), IntIntList.IntIntNil))))
+    test("If the input list has less than two elements, IntIntNil should be returned"):
+        val input = IntCons(1, IntNil())
+        assertEquals(movingWindow(input), IntIntList.IntIntNil)
 }
