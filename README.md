@@ -204,7 +204,9 @@ Implement the following three functions:
 
 **Hint:** Want to test your code? Run `testOnly EnumContextTest` in `sbt`.
 
-## Tree Mapping
+## Tree Mapping and Reducing (InfTree.scala & InfTreeOps.scala)
+
+**Hint:** Want to test your solutions in this chapter? Run `testOnly InfTreeOpsTest` in `sbt`.
 
 Last week we worked with trees using a clunky API of `.left`, `.right`, and `.isEmpty`. This time, let’s do it the right way. And, to mix things up a bit, we’ll see a tree that contains values only at the leaves, instead of in every node.
 
@@ -225,7 +227,46 @@ What might be the `enum` representation of the tree below?
 
 ![treeExampleImage](example.jpg)
 
-You will learn more about trees later in the course.
+### Tree Mapping
+
+Let’s start with the treeMap function:
+
+```scala
+def treeMap(tree: IntTree, value: Int): IntTree =
+    ???
+```
+
+It takes a tree and adds a specified value to each leaf node.
+
+For instance, let’s name the tree we just saw in the diagram as `t`. The following diagram dipicts the computation of `treeMap(t, 1)`.
+
+*BILD*
+
+*BILD*
+
+### Tree Reducing
+
+The second task is the treeReduce function:
+
+```scala
+def treeReduce(tree: IntTree): Int =
+    ???
+```
+
+Given a tree, the function returns the sum of all leaf nodes. The diagram below depicts the process `treeReduce(t)`.
+
+*BILD*
+
+*BILD*
+
+Intuitively, it is a *bottom-up* aggregation of values in the leaves. The values flow from the bottom to the root. At each branch node, the aggregated results from the two children are merged.
+
+But many of us prefer to think of it as a “pull” operation: to compute its own value, each internal node “pulls” the values of the subtrees by making recursive call.
+
+A bit more formally,
+
+- For each branch node, e.g. `Branch(left, right)`, the function should recurse on both left and right and merge the results.
+- For the leaf node, e.g. `Leaf(value)`, the value is returned.
 
 ## IntList (IntList.scala & IntListOps.scala)
 
