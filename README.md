@@ -244,6 +244,8 @@ For instance, let’s name the tree we just saw in the diagram as `t`. The follo
 
 ![treeMapExampleImage2](treeMap2.jpg)
 
+We will later see a generalized `treeMap` function that can apply arbitrary functions to the values in a tree.
+
 ### Tree Reducing
 
 The second task is the `treeReduce` function:
@@ -267,6 +269,8 @@ A bit more formally,
 
 - For each branch node, e.g. `Branch(left, right)`, the function should recurse on both left and right and merge the results.
 - For the leaf node, e.g. `Leaf(value)`, the value is returned.
+
+Again, we will later see `reduce` in a more general setting, not just summation of values.
 
 ## IntList (IntList.scala & IntListOps.scala)
 
