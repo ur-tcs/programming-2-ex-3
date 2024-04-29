@@ -229,7 +229,7 @@ What might be the `enum` representation of the tree below?
 
 ### Tree Mapping
 
-Let’s start with the treeMap function:
+Let’s start with the `treeMap` function:
 
 ```scala
 def treeMap(tree: IntTree, value: Int): IntTree =
@@ -246,7 +246,7 @@ For instance, let’s name the tree we just saw in the diagram as `t`. The follo
 
 ### Tree Reducing
 
-The second task is the treeReduce function:
+The second task is the `treeReduce` function:
 
 ```scala
 def treeReduce(tree: IntTree): Int =
@@ -311,9 +311,9 @@ Implement `extractSecond`:
 
 ### zipping and unzipping
 
-We have studied many functions on single lists, and also seen that some of these generalize to trees; here, we will introduce some of the most essential operations multiple lists.
+We have studied many functions on single lists, and also seen that some of these generalize to trees; here, we will introduce some of the most essential operations on multiple lists.
 
-Let’s define an intermediate type IntIntList of lists of pairs of ints:
+Let’s define a type IntIntList of lists of pairs of ints:
 
 ```scala
 enum IntIntList:
