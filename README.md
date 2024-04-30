@@ -149,8 +149,10 @@ For instance, we can have a context which associates `"x"` with `1` and `"y"` wi
 
 Think of what Scala types and features you may use to represent a context before proceeding.
 
+**Note:** Think about your answer before opening the file.
+
 <details>
-  <summary>Our choice of representation</summary>
+  <summary>Our choice of representation (already in EnumContext.scala)</summary>
     We’ll start by representing contexts using an enum (and we’ll see another representation later):
 
     
@@ -204,9 +206,9 @@ Implement the following three functions:
 
 **Hint:** Want to test your code? Run `testOnly EnumContextTest` in `sbt`.
 
-## Tree Mapping and Reducing (InfTree.scala & InfTreeOps.scala)
+## Tree Mapping and Reducing (IntTree.scala & IntTreeOps.scala)
 
-**Hint:** Want to test your solutions in this chapter? Run `testOnly InfTreeOpsTest` in `sbt`.
+**Hint:** Want to test your solutions in this chapter? Run `testOnly IntTreeOpsTest` in `sbt`.
 
 Last week we worked with trees using a clunky API of `.left`, `.right`, and `.isEmpty`. This time, let’s do it the right way. And, to mix things up a bit, we’ll see a tree that contains values only at the leaves, instead of in every node.
 
@@ -289,7 +291,7 @@ First, rewrite `polishEval` ([from last week](https://github.com/ur-tcs/programm
 
 Throw `InvalidOperationNumber exception` if the operator is not defined, and `InvalidExpression` if the input is not a valid polish-notation expression.
 
-Compare your version new version with the original `if`-based implementation. Which one is more readable?
+Compare your version with the original `if`-based implementation. Which one is more readable?
 
 ### extractSecond
 

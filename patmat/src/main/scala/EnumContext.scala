@@ -1,5 +1,6 @@
-// Replace with your definition
-type Context = Nothing
+enum Context:
+  case Empty
+  case Cons(name: String, value: Int, tail: Context)
 
 def empty: Context =
   ???
