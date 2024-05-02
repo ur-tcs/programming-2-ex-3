@@ -82,7 +82,7 @@ Complete the following two functions:
 
 **Note:** This exercise is taken from [Logical Foundations](https://softwarefoundations.cis.upenn.edu/lf-current/Basics.html), a book about mathematical proofs of programs, and translated into Scala.
 
-## Tri-booleans (TriBool.scala & triBoolOps.scala)
+## Tri-booleans (TriBool.scala & TriBoolOps.scala)
 
 By now you’re very familiar with Booleans. But in real life, not every thing is `Yes` or `No`: sometimes we just don’t know! Tri-boolean logic helps with this by adding an indeterminate value, `Maybe`:
 
@@ -276,7 +276,7 @@ Again, we will later see `reduce` in a more general setting, not just summation 
 
 ## IntList (IntList.scala & IntListOps.scala)
 
-Let’s implement functions on `IntList` again, this time with pattern matching. Before starting this part of exercises, we suggest you implementing several `IntList` questions from previous weeks' exercises using pattern matching to warm yourself up!
+You already used `IntList`s in last weeks exercise, let’s implement a few functions again, this time with pattern matching. Before starting this part of exercises, we suggest you implementing several `IntList` questions from previous weeks' exercises using pattern matching to warm yourself up!
 
 **Hint:** Want to check answers in this section on computer? Test them with `testOnly IntListOpsTest`.
 
